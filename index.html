@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Student Registration Form</h1>
+        
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="rollno">Roll no. :</label>
+                <input type="text" id="rollno" name="rollno" class="full-width" required>
+            </div>
+
+            <div class="form-group">
+                <label>Student name :</label>
+                <div class="name-inputs">
+                    <input type="text" id="firstname" name="firstname" placeholder="First Name" required>
+                    <span style="font-size: 20px;">-</span>
+                    <input type="text" id="lastname" name="lastname" placeholder="Last Name" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="fathername">Father's name :</label>
+                <input type="text" id="fathername" name="fathername" class="full-width" required>
+            </div>
+
+            <div class="form-group">
+                <label>Date of birth :</label>
+                <div class="dob-inputs">
+                    <input type="text" id="day" name="day" placeholder="Day" maxlength="2" required>
+                    <span>-</span>
+                    <input type="text" id="month" name="month" placeholder="Month" maxlength="2" required>
+                    <span>-</span>
+                    <input type="text" id="year" name="year" placeholder="Year" maxlength="4" required>
+                    <span class="dob-format">(DD-MM-YYYY)</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Mobile no. :</label>
+                <div class="mobile-inputs">
+                    <input type="text" class="country-code" value="+91" readonly>
+                    <span style="font-size: 20px;">-</span>
+                    <input type="text" id="mobile" name="mobile" maxlength="10" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email id :</label>
+                <input type="email" id="email" name="email" class="full-width" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password :</label>
+                <input type="password" id="password" name="password" class="full-width" required>
+            </div>
+
+            <div class="form-group">
+                <label>Gender :</label>
+                <div class="gender-options">
+                    <label>
+                        <input type="radio" name="gender" value="Male" required>
+                        Male
+                    </label>
+                    <label>
+                        <input type="radio" name="gender" value="Female" required>
+                        Female
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Department :</label>
+                <div class="department-options">
+                    <label>
+                        <input type="checkbox" name="department" value="CSE">
+                        CSE
+                    </label>
+                    <label>
+                        <input type="checkbox" name="department" value="IT">
+                        IT
+                    </label>
+                    <label>
+                        <input type="checkbox" name="department" value="ECE">
+                        ECE
+                    </label>
+                    <label>
+                        <input type="checkbox" name="department" value="Civil">
+                        Civil
+                    </label>
+                    <label>
+                        <input type="checkbox" name="department" value="Mech">
+                        Mech
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="course">Course :</label>
+                <select id="course" name="course" class="full-width" required>
+                    <option value="">---------------------- Select Current Course's ----------------------</option>
+                    <option value="B.Tech">B.Tech</option>
+                    <option value="M.Tech">M.Tech</option>
+                    <option value="B.Sc">B.Sc</option>
+                    <option value="M.Sc">M.Sc</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="photo">Student photo :</label>
+                <div class="file-input">
+                    <input type="file" id="photo" name="photo" accept="image/*">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="city">City :</label>
+                <input type="text" id="city" name="city" class="full-width" required>
+            </div>
+
+            <div class="form-group address-group">
+                <label for="address">Address :</label>
+                <textarea id="address" name="address" class="full-width" required></textarea>
+            </div>
+
+            <div class="submit-btn">
+                <button type="submit" id="submitBtn">Register</button>
+            </div>
+        </form>
+
+        <div id="message" style="display: none; margin-top: 20px; text-align: center; font-size: 20px; padding: 15px; border-radius: 5px;"></div>
+    </div>
+
+    <script>
+        // Google Apps Script Web App URL
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyd8BhH0rURq63z3tdK4POpjwl_DoTh4bwDOsILbK6X0qUsq1AUcdMiki7hQFFNLtzqrQ/exec';
+
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const messageDiv = document.getElementById('message');
+            
+            // Disable button during submission
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            
+            // Get form data
+            const day = document.getElementById('day').value;
+            const month = document.getElementById('month').value;
+            const year = document.getElementById('year').value;
+            const dob = `${day}-${month}-${year}`;
+            
+            // Get selected departments
+            const departmentCheckboxes = document.querySelectorAll('input[name="department"]:checked');
+            const departments = Array.from(departmentCheckboxes).map(cb => cb.value).join(', ');
+            
+            // Get selected gender
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            
+            const formData = {
+                rollno: document.getElementById('rollno').value,
+                firstname: document.getElementById('firstname').value,
+                lastname: document.getElementById('lastname').value,
+                fathername: document.getElementById('fathername').value,
+                dob: dob,
+                mobile: '+91-' + document.getElementById('mobile').value,
+                email: document.getElementById('email').value,
+                gender: gender,
+                department: departments,
+                course: document.getElementById('course').value,
+                city: document.getElementById('city').value,
+                address: document.getElementById('address').value
+            };
+            
+            // Send data to Google Sheets
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                // Show success message
+                messageDiv.style.display = 'block';
+                messageDiv.style.backgroundColor = '#90EE90';
+                messageDiv.style.color = '#006400';
+                messageDiv.textContent = '✓ Registration Successful! Data saved to Google Sheets.';
+                
+                // Reset form
+                document.getElementById('registrationForm').reset();
+                
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Register';
+                
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 5000);
+            })
+            .catch(error => {
+                // Show error message
+                messageDiv.style.display = 'block';
+                messageDiv.style.backgroundColor = '#FFB6C1';
+                messageDiv.style.color = '#8B0000';
+                messageDiv.textContent = '✗ Error: Could not save data. Please try again.';
+                
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Register';
+                
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

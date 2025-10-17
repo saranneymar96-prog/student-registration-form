@@ -1,0 +1,180 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ffd4d4;
+    font-family: 'Times New Roman', Times, serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background-color: #ffd4d4;
+    padding: 40px 60px;
+    max-width: 900px;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    font-size: 48px;
+    margin-bottom: 40px;
+    font-weight: bold;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    font-size: 24px;
+    min-width: 200px;
+    margin-right: 20px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group select,
+.form-group textarea {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 1px solid #666;
+    background-color: white;
+    font-family: Arial, sans-serif;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group select {
+    height: 40px;
+}
+
+.name-inputs {
+    display: flex;
+    gap: 10px;
+    flex: 1;
+}
+
+.name-inputs input {
+    flex: 1;
+}
+
+.dob-inputs {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.dob-inputs input {
+    width: 80px;
+}
+
+.dob-inputs input:last-of-type {
+    width: 100px;
+}
+
+.dob-inputs span {
+    font-size: 20px;
+}
+
+.dob-format {
+    font-size: 20px;
+    font-style: italic;
+    margin-left: 10px;
+}
+
+.mobile-inputs {
+    display: flex;
+    gap: 10px;
+    flex: 1;
+}
+
+.mobile-inputs .country-code {
+    width: 70px;
+    text-align: center;
+}
+
+.mobile-inputs input[type="text"] {
+    flex: 1;
+}
+
+.full-width {
+    flex: 1;
+}
+
+.gender-options,
+.department-options {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    flex: 1;
+}
+
+.gender-options label,
+.department-options label {
+    font-size: 24px;
+    min-width: auto;
+    margin-right: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.file-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.file-input input[type="file"] {
+    font-size: 14px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 100px;
+    resize: vertical;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+}
+
+.address-group {
+    align-items: flex-start;
+}
+
+.submit-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+button {
+    padding: 10px 40px;
+    font-size: 20px;
+    background-color: white;
+    border: 2px solid #666;
+    cursor: pointer;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+button:hover {
+    background-color: #f0f0f0;
+}
